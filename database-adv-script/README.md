@@ -27,6 +27,7 @@ INNER JOIN bookings b ON u.id = b.user_id;
 
 Retrieve all properties and their reviews, including properties that have no reviews.
 
+```sql
 SELECT p.id, p.name, p.location, r.id AS review_id, r.rating, r.comment
 FROM properties p
 LEFT JOIN reviews r ON p.id = r.property_id;
