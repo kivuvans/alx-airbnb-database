@@ -89,3 +89,7 @@ Regularly monitor index usage and database performance to avoid unnecessary over
 | `database_index.sql`   | SQL commands for creating indexes                 |
 | `index_performance.md` | Documentation of performance analysis and results |
 
+🧑‍💻 Author
+
+Evans Kivuva
+ALX Software Engineering Program – Airbnb Database (Advanced SQL)
