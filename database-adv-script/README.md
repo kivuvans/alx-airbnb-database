@@ -135,6 +135,99 @@ Correlated Subquery	List of users with more than 3 bookings
 File	Description
 subqueries.sql	Contains all subquery SQL statements
 README.md	Documentation with explanations and examples
+
+
+# 2️⃣ Apply Aggregations and Window Functions
+
+## 🎯 Objective
+To use **SQL aggregation** and **window functions** to analyze Airbnb database data efficiently and extract insights on user activity and property performance.
+
+---
+
+## 🧠 Key Concepts
+
+### 🔹 Aggregations
+Aggregation functions summarize data into single values (e.g., COUNT, SUM, AVG).
+
+### 🔹 Window Functions
+Window functions perform calculations across sets of rows related to the current row, without collapsing results into a single row (unlike `GROUP BY`).
+
+---
+
+## 📋 Tasks Implemented
+
+### 1️⃣ Aggregation — Count Total Bookings Per User
+This query calculates how many bookings each user has made.
+
+```sql
+SELECT 
+    u.id AS user_id,
+    u.first_name,
+    u.last_name,
+    COUNT(b.id) AS total_bookings
+FROM 
+    users u
+LEFT JOIN 
+    bookings b 
+ON 
+    u.id = b.user_id
+GROUP BY 
+    u.id, u.first_name, u.last_name
+ORDER BY 
+    total_bookings DESC;
+```
+
+🧩 Explanation:
+
+Joins the users and bookings tables.
+
+Groups data by each user’s ID to count total bookings.
+
+Orders results by total_bookings to see top active users first.
+
+2️⃣ Window Function — Rank Properties by Bookings
+
+This query ranks properties based on how many bookings they’ve received.
+```sql
+SELECT 
+    p.id AS property_id,
+    p.name AS property_name,
+    COUNT(b.id) AS total_bookings,
+    RANK() OVER (ORDER BY COUNT(b.id) DESC) AS booking_rank
+FROM 
+    properties p
+LEFT JOIN 
+    bookings b 
+ON 
+    p.id = b.property_id
+GROUP BY 
+    p.id, p.name
+ORDER BY 
+    booking_rank ASC;
+```
+
+🧩 Explanation:
+
+Calculates total bookings per property.
+
+Uses RANK() with OVER() to assign ranks based on descending booking counts.
+
+Displays which properties are most popular among users.
+
+| Query                 | Output Description                                |
+| --------------------- | ------------------------------------------------- |
+| Aggregation Query     | Total bookings made by each user                  |
+| Window Function Query | Ranked list of properties based on booking counts |
+
+
+| File                                    | Description                                                |
+| --------------------------------------- | ---------------------------------------------------------- |
+| `aggregations_and_window_functions.sql` | SQL code implementing aggregations and window functions    |
+| `README.md`                             | Documentation and explanations for the implemented queries |
+
+
+
+
 🧑‍💻 Author
 
 Evans Kivuva
