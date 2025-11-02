@@ -11,10 +11,13 @@ Continuously monitor and refine the **Airbnb database performance** by analyzing
 We selected the following **frequently used queries** for performance monitoring:
 
 1. Retrieve all bookings by user:
-   ```sql
-   SELECT * FROM bookings WHERE user_id = 1023;
+
+```sql
+SELECT * FROM bookings WHERE user_id = 1023;
 ```
+
 2. Get top-rated properties:
+
 ```sql
 SELECT property_id, AVG(rating) AS avg_rating
 FROM reviews
